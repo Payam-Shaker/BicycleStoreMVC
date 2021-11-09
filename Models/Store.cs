@@ -22,6 +22,6 @@ namespace BicycleStoreMVC.Models
         public string ZipCode { get; set; }
         public ICollection<Staff> Staffs { get; set; }
         public ICollection<Order> Orders { get; set; }
-
+        public Stock Stocks { get; set; }
     }
 }

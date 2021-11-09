@@ -8,9 +8,6 @@
   <ItemGroup>
     <Compile Remove="BicycleStoreDbContext.cs" />
     <Compile Remove="Models\OrderItem.cs" />
-    <Compile Remove="Models\Staff.cs" />
-    <Compile Remove="Models\Stock.cs" />
-    <Compile Remove="Models\Store.cs" />
   </ItemGroup>
 
   <ItemGroup>

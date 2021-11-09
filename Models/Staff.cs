@@ -20,10 +20,10 @@ namespace BicycleStoreMVC.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public Store Store { get; set; }
-        [ForeignKey("Store")]
+        //[ForeignKey("Store")]
         public int StoreID { get; set; }
         public ICollection<Staff> Staffs { get; set; }
-        [ForeignKey("Staff")]
+        //[ForeignKey("Staff")]
         public int? ManagerID { get; set; }
         public ICollection<Order> Orders { get; set; }
 

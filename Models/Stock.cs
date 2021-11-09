@@ -14,10 +14,10 @@ namespace BicycleStoreMVC.Models
         }
 
         public Store Store { get; set; }
-        [ForeignKey("Store")]
+        //[ForeignKey("Store")]
         public int StoreID { get; set; }
         public Product Product { get; set; }
-        [ForeignKey("Product")]
+        //[ForeignKey("Product")]
         public int ProductID { get; set; }
         public int Quantity { get; set; }
     }

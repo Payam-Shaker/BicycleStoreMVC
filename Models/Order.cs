@@ -21,11 +21,11 @@ namespace BicycleStoreMVC.Models
         public int OrderStatus { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
-        //public Store Store { get; set; }
+        public Store Store { get; set; }
         //[ForeignKey("Store")]
-        //public int StoreID { get; set; }
-        //public Staff Staff { get; set; }
+        public int StoreID { get; set; }
+        public Staff Staff { get; set; }
         //[ForeignKey("Staff")]
-        //public int StaffID { get; set; }
+        public int StaffID { get; set; }
     }
 }

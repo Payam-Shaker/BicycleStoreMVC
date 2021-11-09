@@ -4,14 +4,16 @@ using BicycleStoreMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BicycleStoreMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211109145658_store table added")]
+    partial class storetableadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,17 +106,12 @@ namespace BicycleStoreMVC.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("DateTime");
 
-                    b.Property<int>("StaffID")
-                        .HasColumnType("int");
-
                     b.Property<int>("StoreID")
                         .HasColumnType("int");
 
                     b.HasKey("OrderID");
 
                     b.HasIndex("CustomerID");
-
-                    b.HasIndex("StaffID");
 
                     b.HasIndex("StoreID");
 
@@ -150,61 +147,6 @@ namespace BicycleStoreMVC.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("BicycleStoreMVC.Models.Staff", b =>
-                {
-                    b.Property<int>("StaffID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ManagerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StaffID1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreID")
-                        .HasColumnType("int");
-
-                    b.HasKey("StaffID");
-
-                    b.HasIndex("StaffID1");
-
-                    b.HasIndex("StoreID");
-
-                    b.ToTable("Staffs");
-                });
-
-            modelBuilder.Entity("BicycleStoreMVC.Models.Stock", b =>
-                {
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductID");
-
-                    b.HasIndex("StoreID");
-
-                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("BicycleStoreMVC.Models.Store", b =>
@@ -245,12 +187,6 @@ namespace BicycleStoreMVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BicycleStoreMVC.Models.Staff", "Staff")
-                        .WithMany("Orders")
-                        .HasForeignKey("StaffID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BicycleStoreMVC.Models.Store", "Store")
                         .WithMany("Orders")
                         .HasForeignKey("StoreID")
@@ -269,34 +205,6 @@ namespace BicycleStoreMVC.Migrations
                     b.HasOne("BicycleStoreMVC.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BicycleStoreMVC.Models.Staff", b =>
-                {
-                    b.HasOne("BicycleStoreMVC.Models.Staff", null)
-                        .WithMany("Staffs")
-                        .HasForeignKey("StaffID1");
-
-                    b.HasOne("BicycleStoreMVC.Models.Store", "Store")
-                        .WithMany("Staffs")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BicycleStoreMVC.Models.Stock", b =>
-                {
-                    b.HasOne("BicycleStoreMVC.Models.Product", "Product")
-                        .WithOne("Stocks")
-                        .HasForeignKey("BicycleStoreMVC.Models.Stock", "ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BicycleStoreMVC.Models.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

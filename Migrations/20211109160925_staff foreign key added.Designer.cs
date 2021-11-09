@@ -4,14 +4,16 @@ using BicycleStoreMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BicycleStoreMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211109160925_staff foreign key added")]
+    partial class staffforeignkeyadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,24 +191,6 @@ namespace BicycleStoreMVC.Migrations
                     b.ToTable("Staffs");
                 });
 
-            modelBuilder.Entity("BicycleStoreMVC.Models.Stock", b =>
-                {
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductID");
-
-                    b.HasIndex("StoreID");
-
-                    b.ToTable("Stocks");
-                });
-
             modelBuilder.Entity("BicycleStoreMVC.Models.Store", b =>
                 {
                     b.Property<int>("StoreID")
@@ -281,21 +265,6 @@ namespace BicycleStoreMVC.Migrations
 
                     b.HasOne("BicycleStoreMVC.Models.Store", "Store")
                         .WithMany("Staffs")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BicycleStoreMVC.Models.Stock", b =>
-                {
-                    b.HasOne("BicycleStoreMVC.Models.Product", "Product")
-                        .WithOne("Stocks")
-                        .HasForeignKey("BicycleStoreMVC.Models.Stock", "ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BicycleStoreMVC.Models.Store", "Store")
-                        .WithMany()
                         .HasForeignKey("StoreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

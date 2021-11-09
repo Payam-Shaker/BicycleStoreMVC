@@ -25,6 +25,7 @@ namespace BicycleStoreMVC.Models
         //[ForeignKey("Brand")]
         public int BrandID { get; set; }
         //public ICollection<OrderItem> OrderItems { get; set; }
+        public Stock Stocks { get; set; }
 
     }
 }

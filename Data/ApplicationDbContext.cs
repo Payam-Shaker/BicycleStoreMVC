@@ -19,9 +19,10 @@ namespace BicycleStoreMVC.Data
         public DbSet<Order> Orders { get; set; }
         //public DbSet<OrderItem> orderItems { get; set; }
         public DbSet<Product> Products { get; set; }
-        //public DbSet<Staff> Staffs { get; set; }
-        //public DbSet<Stock> Stocks { get; set; }
-        //public DbSet<Store> Stores { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<Store> Stores { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>(b =>
@@ -43,6 +44,7 @@ namespace BicycleStoreMVC.Data
                 //.HasMaxLength(256);
                 b.Property<int>("BrandID")
                     .HasColumnType("int");
+
 
                 //b.ToTable("AspNetRoles");
                // modelBuilder.Entity<Post>()
@@ -92,16 +94,41 @@ namespace BicycleStoreMVC.Data
                 .HasColumnType("DateTime");
                 b.Property<DateTime>("ShippingDate")
                 .HasColumnType("DateTime");
+                b.Property<int>("StoreID")
+                .HasColumnType("int");
 
                 b.HasOne(or => or.Customer)
                 .WithMany(d => d.Orders)
                 .HasForeignKey(or => or.CustomerID)
                 .OnDelete(DeleteBehavior.Cascade);
 
+                b.HasOne(or => or.Store)
+               .WithMany(d => d.Orders)
+               .HasForeignKey(or => or.StoreID)
+               .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne(or => or.Staff)
+               .WithMany(d => d.Orders)
+               .HasForeignKey(or => or.StaffID)
+               .OnDelete(DeleteBehavior.Cascade);
 
 
 
+            });
 
+            modelBuilder.Entity<Stock>(b =>
+            {
+                b.HasKey("ProductID");
+
+                //b.Property<int>("StoreID")
+                //.HasColumnType("int");
+                //b.Property<int>("ProductID")
+                //    .HasColumnType("int");
+
+                //b.HasOne(sto => sto.Product)
+                //.WithOne(d => d.Stocks)
+                //.HasForeignKey(sto => sto.ProductID)
+                //.OnDelete(DeleteBehavior.Cascade);
             });
 
         }
