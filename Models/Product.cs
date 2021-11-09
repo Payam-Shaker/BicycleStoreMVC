@@ -21,9 +21,9 @@ namespace BicycleStoreMVC.Models
         public Category Category { get; set; }
         //[ForeignKey ("Category")]
         public int CategoryID { get; set; }
-        //public Brand Brand { get; set; }
+        public Brand Brand { get; set; }
         //[ForeignKey("Brand")]
-        //public int BrandID { get; set; }
+        public int BrandID { get; set; }
         //public ICollection<OrderItem> OrderItems { get; set; }
 
     }

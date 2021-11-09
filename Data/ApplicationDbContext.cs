@@ -13,7 +13,7 @@ namespace BicycleStoreMVC.Data
             : base(options)
         {
         }
-        //public DbSet<Brand> Brands { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         //public DbSet<Customer> Customers { get; set; }
         //public DbSet<Order> Orders { get; set; }
@@ -49,8 +49,15 @@ namespace BicycleStoreMVC.Data
                 b.HasOne(prod => prod.Category)
                 .WithMany(d => d.Products)
                 .HasForeignKey(prod => prod.CategoryID)
-                .OnDelete(DeleteBehavior.Cascade)
-                ;
+                .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne(prod => prod.Brand)
+                .WithMany(d => d.Products)
+                .HasForeignKey(prod => prod.BrandID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
             });
 
         }
