@@ -15,8 +15,8 @@ namespace BicycleStoreMVC.Data
         }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
-        //public DbSet<Customer> Customers { get; set; }
-        //public DbSet<Order> Orders { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
         //public DbSet<OrderItem> orderItems { get; set; }
         public DbSet<Product> Products { get; set; }
         //public DbSet<Staff> Staffs { get; set; }
@@ -55,6 +55,50 @@ namespace BicycleStoreMVC.Data
                 .WithMany(d => d.Products)
                 .HasForeignKey(prod => prod.BrandID)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
+
+            });
+
+            modelBuilder.Entity<Customer>(b =>
+            {
+                b.HasKey("CustomerID");
+
+                b.Property<string>("FirstName")
+                    .HasColumnType("nvarchar(50)");
+                b.Property<string>("LastName")
+                    .HasColumnType("nvarchar(50)");
+                b.Property<string>("Phon")
+                    .HasColumnType("nvarchar(30)");
+                b.Property<string>("Email")
+                    .HasColumnType("nvarchar(30)");
+                b.Property<string>("Street")
+                    .HasColumnType("nvarchar(100)");
+                b.Property<string>("City")
+                    .HasColumnType("nvarchar(30)");
+                b.Property<string>("ZipCode")
+                    .HasColumnType("nvarchar(20)");
+
+            });
+            modelBuilder.Entity<Order>(b =>
+            {
+                b.HasKey("OrderID");
+
+                b.Property<int>("CustomerID")
+                .HasColumnType("int");
+                b.Property<int>("OrderStatus")
+                .HasColumnType("int");
+                b.Property<DateTime>("OrderDate")
+                .HasColumnType("DateTime");
+                b.Property<DateTime>("ShippingDate")
+                .HasColumnType("DateTime");
+
+                b.HasOne(or => or.Customer)
+                .WithMany(d => d.Orders)
+                .HasForeignKey(or => or.CustomerID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
 
 
 
