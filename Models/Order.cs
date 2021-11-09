@@ -27,5 +27,6 @@ namespace BicycleStoreMVC.Models
         public Staff Staff { get; set; }
         //[ForeignKey("Staff")]
         public int StaffID { get; set; }
+        public OrderItem OrderItems { get; set; }
     }
 }

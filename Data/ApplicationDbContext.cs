@@ -17,7 +17,7 @@ namespace BicycleStoreMVC.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
-        //public DbSet<OrderItem> orderItems { get; set; }
+        public DbSet<OrderItem> orderItems { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Stock> Stocks { get; set; }
@@ -129,6 +129,11 @@ namespace BicycleStoreMVC.Data
                 //.WithOne(d => d.Stocks)
                 //.HasForeignKey(sto => sto.ProductID)
                 //.OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<OrderItem>(b =>
+            {
+                b.HasKey("OrderID");
             });
 
         }

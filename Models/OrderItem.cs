@@ -16,13 +16,13 @@ namespace BicycleStoreMVC.Models
         [Key]
         public int ItemID { get; set; }
         public Product Product { get; set; }
-        [ForeignKey("Product")]
+        //[ForeignKey("Product")]
         public int ProductID { get; set; }
         public int Quantity { get; set; }
         public decimal ListPrice { get; set; }
         public decimal Discount { get; set; }
         public Order Order { get; set; }
-        [ForeignKey("Order")]
+        //[ForeignKey("Order")]
         public int OrderID { get; set; }
     }
 }
