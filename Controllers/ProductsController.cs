@@ -49,8 +49,8 @@ namespace BicycleStoreMVC.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["BrandName"] = new SelectList(_context.Brands, "BrandName", "BrandName");
-            ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryName", "CategoryName");
+            ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName");
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace BicycleStoreMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "BrandID", product.BrandID);
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", product.CategoryID);
+            ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName", product.BrandID);
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
