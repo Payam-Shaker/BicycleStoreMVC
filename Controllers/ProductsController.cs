@@ -67,8 +67,8 @@ namespace BicycleStoreMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName", product.BrandID);
-            ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName", product.CategoryID);
+            //ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName", product.BrandID);
+            //ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
@@ -85,8 +85,8 @@ namespace BicycleStoreMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "BrandID", product.BrandID);
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", product.CategoryID);
+            ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName", product.BrandID);
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
