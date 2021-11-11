@@ -134,6 +134,8 @@ namespace BicycleStoreMVC.Data
             modelBuilder.Entity<OrderItem>(b =>
             {
                 b.HasKey("OrderID");
+
+
             });
 
         }
