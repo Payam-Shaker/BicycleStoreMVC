@@ -80,6 +80,9 @@ namespace BicycleStoreMVC.Data
                     .HasColumnType("nvarchar(30)");
                 b.Property<string>("ZipCode")
                     .HasColumnType("nvarchar(20)");
+                //b.Property<byte[]>("PasswordHash")
+                //    .HasColumnType("nvarchar(20)");
+
 
             });
             modelBuilder.Entity<Order>(b =>
