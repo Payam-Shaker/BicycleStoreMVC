@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BicycleStoreMVC.Controllers
 {
+    /// <summary>
+    /// add later a new method for giving star to the User as a test 
+    /// </summary>
     public class UserController : Controller
     {
         public IActionResult Index()
