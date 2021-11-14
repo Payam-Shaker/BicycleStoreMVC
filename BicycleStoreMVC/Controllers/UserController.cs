@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace BicycleStoreMVC.Controllers
 {
@@ -57,7 +58,7 @@ namespace BicycleStoreMVC.Controllers
                     //to clear the form
                     ModelState.Clear();
                     //success msg
-                return PartialView("_RegisterSuccessful");
+                    return PartialView("_RegisterSuccessful");
 
                 }
                 catch (Exception ex)
@@ -88,9 +89,59 @@ namespace BicycleStoreMVC.Controllers
             }
         }
 
-        public IActionResult Login(CustomerDto customerDto)
+        public IActionResult LoginView()
         {
+            return View("Login");
+        }
 
+        public IActionResult Login(CustomerLoginDto customerLoginDto)
+        {
+            if (string.IsNullOrEmpty(customerLoginDto.UserName) || string.IsNullOrEmpty(customerLoginDto.Password))
+                return null;
+            //check for username 
+            var user = FindByEmail(customerLoginDto.UserName);
+
+            if (user == null)
+            {
+                return null;
+            }
+            //check whether password is correct...
+            if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            //authentication is successful
+            return PartialView("_LoginSuccessful");
+        }
+
+        public Customer FindByEmail(string userName)
+        {
+            var user = _context.Customers.FirstOrDefault(p => p.Email == userName);
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                throw new Exception($"User not found!");
+            }
+        }
+        public bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        {
+            if (password == null) throw new ArgumentNullException("password");
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+            if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
+            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != storedHash[i]) return false;
+                }
+            }
+
+            return true;
         }
     }
 }
