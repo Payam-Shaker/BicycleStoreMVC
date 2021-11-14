@@ -1,6 +1,0 @@
-C:\Users\payaa\source\repos\BicycleStoreApp\BicycleStore.Database\bin\Debug\BicycleStore.Database.dacpac
-C:\Users\payaa\source\repos\BicycleStoreApp\BicycleStore.Database\bin\Debug\BicycleStore.Database.dll
-C:\Users\payaa\source\repos\BicycleStoreApp\BicycleStore.Database\bin\Debug\BicycleStore.Database.pdb
-C:\Users\payaa\source\repos\BicycleStoreApp\BicycleStore.Database\obj\Debug\BicycleStore.Database.sqlproj.AssemblyReference.cache
-C:\Users\payaa\source\repos\BicycleStoreApp\BicycleStore.Database\obj\Debug\BicycleStore.Database.dll
-C:\Users\payaa\source\repos\BicycleStoreApp\BicycleStore.Database\obj\Debug\BicycleStore.Database.pdb
