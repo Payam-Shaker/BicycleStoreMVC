@@ -1,4 +1,5 @@
 using BicycleStoreMVC.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,12 @@ namespace BicycleStoreMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            //Authentication Middleware Services with the AddAuthentication and AddCookie method.
+            // Authentication scheme passed to AddAuthentication sets to the default authentication scheme for the app.
+            // CookieAuthenticationDefaults.AuthenticationScheme provides "Cookies" for the scheme.
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x => x.LoginPath = "/account/login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

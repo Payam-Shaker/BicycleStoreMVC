@@ -2,11 +2,13 @@
 using BicycleStoreMVC.DTOs;
 using BicycleStoreMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
+using System.Security.Claims;
 
 namespace BicycleStoreMVC.Controllers
 {
@@ -110,8 +112,41 @@ namespace BicycleStoreMVC.Controllers
                 return null;
 
             //authentication is successful
-            return PartialView("_LoginSuccessful");
+            return PartialView("_LoginSuccessfull");
         }
+
+       // [HttpPost]
+        //public IActionResult Authenticate(CustomerLoginDto customerLoginDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View("Index");
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            var user = Login(customerLoginDto.UserName);
+
+        //            if (user == null)
+        //            {
+        //                ModelState.AddModelError(" ", "Username or Password is wrong!");
+        //                return View("Login");
+        //            }
+        //            var claims = new List<Claim>()
+        //            {
+        //                new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.UserName)),
+        //                new Claim(ClaimTypes.Name, user.)
+        //            };
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            throw new Exception($"Login failed!", ex);
+        //        }
+        //    }
+           
+        //}
 
         public Customer FindByEmail(string userName)
         {
