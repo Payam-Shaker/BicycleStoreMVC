@@ -1,5 +1,5 @@
 ﻿using BicycleStoreMVC.Data;
-using BicycleStoreMVC.DTOs;
+using BicycleStore.Domain.DTOs;
 using BicycleStoreMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using System.Security.Claims;
+using BicycleStore.Domain.Models;
 
 namespace BicycleStoreMVC.Controllers
 {
@@ -43,9 +44,9 @@ namespace BicycleStoreMVC.Controllers
                     {
                         FirstName = customerDto.FirstName,
                         LastName = customerDto.LastName,
-                        PasswordHash = passwordHash,
-                        PasswordSalt = passwordSalt,
-                        CreatedDate = DateTime.Now,
+                        //PasswordHash = passwordHash,
+                        //PasswordSalt = passwordSalt,
+                        //CreatedDate = DateTime.Now,
                         Email = customerDto.Email,
                         Street = customerDto.Street,
                         City = customerDto.City,
@@ -108,7 +109,7 @@ namespace BicycleStoreMVC.Controllers
                 return null;
             }
             //check whether password is correct...
-            if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+            //if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
             //authentication is successful

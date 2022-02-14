@@ -60,10 +60,9 @@
     <Folder Include="Schemas\Production" />
     <Folder Include="Schemas\Sales" />
     <Folder Include="Schemas\Production\Tables" />
+    <Folder Include="Schemas\Production\Scrpts" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AddNewCategories.sql" />
-    <None Include="AddNewBrands.sql" />
     <None Include="Schemas\Production\Tables\Brand.sql" />
     <None Include="Schemas\FK_finder.sql" />
     <None Include="Schemas\Production\Tables\Category.sql" />
@@ -74,5 +73,11 @@
     <None Include="Schemas\Sales\Customer.sql" />
     <None Include="Schemas\Sales\Order.sql" />
     <None Include="Schemas\Sales\Order_Item.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schemas\Production\Scrpts\AddNewCategories.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schemas\Production\Scrpts\AddNewBrands.sql" />
   </ItemGroup>
 </Project>

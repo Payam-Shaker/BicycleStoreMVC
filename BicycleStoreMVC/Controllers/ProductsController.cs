@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BicycleStoreMVC.Data;
-using BicycleStoreMVC.Models;
+using BicycleStore.Domain.Models;
 
 namespace BicycleStoreMVC.Controllers
 {

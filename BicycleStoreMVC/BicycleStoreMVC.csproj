@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\**" />
+    <Compile Remove="Models\**" />
+    <Content Remove="DTOs\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="DTOs\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="DTOs\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="BicycleStoreDbContext.cs" />
   </ItemGroup>
 
@@ -24,6 +35,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BicycleStore.Domain\BicycleStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

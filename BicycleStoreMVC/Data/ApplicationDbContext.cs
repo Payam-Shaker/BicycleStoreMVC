@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using BicycleStore.Domain.Models;
 
 namespace BicycleStoreMVC.Data
 {
@@ -25,113 +25,211 @@ namespace BicycleStoreMVC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>(b =>
+            modelBuilder.Entity<Product>(e =>
             {
-                b.HasKey("ProductID");
-                b.Property<string>("ProductName")
-                    .HasColumnType("nvarchar(50)");
+                e.HasKey(e => e.ProductID)
+                .HasName ("Product_Id");
 
-                b.Property<int>("ModelYear")
-                    //.IsConcurrencyToken()
-                    .HasColumnType("int");
+                e.ToTable("Product", "Production");
 
-                b.Property<decimal>("ListPrice")
-                    .HasColumnType("DECIMAL(20,2)");
-                //.HasMaxLength(256);
+                e.Property(e => e.ProductName)
+                .IsRequired (true)
+                .HasColumnName("Product_Name")
+                .HasColumnType("VARCHAR(50)");
 
-                b.Property<int>("CategoryID")
-                    .HasColumnType("int");
-                //.HasMaxLength(256);
-                b.Property<int>("BrandID")
-                    .HasColumnType("int");
+                e.Property(e => e.ModelYear)
+                .IsRequired(true)
+                .HasColumnName("Product_Year")
+                .HasColumnType("SMALLINT");
+
+                e.Property(e => e.ListPrice)
+                .IsRequired(true)
+                .HasColumnName("Product_Price")
+                .HasColumnType("DECIMAL(10,2)");
+
+                e.Property(e => e.CategoryID)
+                .IsRequired(true)
+                .HasColumnName("Category_Id")
+                .HasColumnType("INT");
+
+                e.Property(e => e.BrandID)
+                .IsRequired(true)
+                .HasColumnName("Brand_Id")
+                .HasColumnType("INT");
 
 
-                //b.ToTable("AspNetRoles");
-               // modelBuilder.Entity<Post>()
-                b.HasOne(prod => prod.Category)
+                e.HasOne(prod => prod.Category)
                 .WithMany(d => d.Products)
                 .HasForeignKey(prod => prod.CategoryID)
+                .HasConstraintName("Category_Id")
                 .OnDelete(DeleteBehavior.Cascade);
 
-                b.HasOne(prod => prod.Brand)
+                e.HasOne(prod => prod.Brand)
                 .WithMany(d => d.Products)
                 .HasForeignKey(prod => prod.BrandID)
+                .HasConstraintName("Brand_Id")
                 .OnDelete(DeleteBehavior.Cascade);
+            });
 
+            modelBuilder.Entity<Brand>(e =>
+            {
+                e.HasKey(e => e.BrandID)
+                .HasName("Brand_Id");
+
+                e.ToTable("Brand", "Production");
+
+                e.Property(e => e.BrandName)
+                .IsRequired(true)
+                .HasColumnName("Brand_Name")
+                .HasColumnType("VARCHAR(50)");
+            });
+
+            modelBuilder.Entity<Category>(e =>
+            {
+                e.HasKey(e => e.CategoryID)
+                .HasName("Category_Id");
+
+                e.ToTable("Category", "Production");
+
+                e.Property(e => e.CategoryName)
+                .IsRequired(true)
+                .HasColumnName("Category_Name")
+                .HasColumnType("VARCHAR(50)");
+            });
+
+
+            modelBuilder.Entity<Customer>(e =>
+            {
+                e.HasKey(e => e.CustomerID)
+                .HasName("Customer_Id");
+
+                e.ToTable("Customer", "Sales");
+
+                e.Property(e => e.FirstName)
+                .IsRequired(true)
+                .HasColumnName("Customer_FirstName")
+                .HasColumnType("varchar(255)");
+
+                e.Property(e => e.LastName)
+                .IsRequired(true)
+                .HasColumnName("Customer_LastName")
+                .HasColumnType("varchar(255)");
+
+                e.Property(e => e.Email)
+                .IsRequired(true)
+                .HasColumnName("Customer_Email")
+                .HasColumnType("varchar(255)");
+
+                e.Property(e => e.Phone)
+                .HasColumnName("Customer_Phone")
+                .HasColumnType("varchar(50)");
+
+                e.Property(e => e.Street)
+                .HasColumnName("Customer_Street")
+                .HasColumnType("varchar(255)");
+
+                e.Property(e => e.City)
+                .HasColumnName("Customer_City")
+                .HasColumnType("varchar(255)");
+
+
+                e.Property(e => e.ZipCode)
+                .HasColumnName("Customer_ZipCode")
+                .HasColumnType("varchar(50)");
 
 
             });
 
-            modelBuilder.Entity<Customer>(b =>
+            modelBuilder.Entity<Order>(e =>
             {
-                b.HasKey("CustomerID");
+                e.HasKey(e => e.OrderID)
+                .HasName("Order_Id");
 
-                b.Property<string>("FirstName")
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("LastName")
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Phon")
-                    .HasColumnType("nvarchar(30)");
-                b.Property<string>("Email")
-                    .HasColumnType("nvarchar(30)");
-                b.Property<string>("Street")
-                    .HasColumnType("nvarchar(100)");
-                b.Property<string>("City")
-                    .HasColumnType("nvarchar(30)");
-                b.Property<string>("ZipCode")
-                    .HasColumnType("nvarchar(20)");
-                //b.Property<byte[]>("PasswordHash")
-                //    .HasColumnType("nvarchar(20)");
+                e.ToTable("Order", "Sales");
+
+                e.Property(e => e.OrderStatus)
+                .IsRequired(true)
+                .HasColumnName("Order_Status")
+                .HasColumnType("SMALLINT");
+
+                e.Property(e => e.OrderDate)
+                .IsRequired(true)
+                .HasColumnName("Order_Date")
+                .HasColumnType("DATE");
+
+                e.Property(e => e.OrderRequiredDate)
+                .IsRequired(true)
+                .HasColumnName("Order_Required_Date")
+                .HasColumnType("DATE");
+
+                e.Property(e => e.ShippingDate)
+                .HasColumnName("Order_Shipped_Date")
+                .HasColumnType("DATE");
+
+                e.Property(e => e.CustomerID)
+                .HasColumnName("Customer_Id")
+                .HasColumnType("INT");
+
+                e.Property(e => e.StoreID)
+                .IsRequired(true)
+                .HasColumnName("Store_Id")
+                .HasColumnType("INT");
+
+                e.Property(e => e.StaffID)
+                .IsRequired(true)
+                .HasColumnName("Staff_Id")
+                .HasColumnType("INT");
 
 
-            });
-            modelBuilder.Entity<Order>(b =>
-            {
-                b.HasKey("OrderID");
-
-                b.Property<int>("CustomerID")
-                .HasColumnType("int");
-                b.Property<int>("OrderStatus")
-                .HasColumnType("int");
-                b.Property<DateTime>("OrderDate")
-                .HasColumnType("DateTime");
-                b.Property<DateTime>("ShippingDate")
-                .HasColumnType("DateTime");
-                b.Property<int>("StoreID")
-                .HasColumnType("int");
-
-                b.HasOne(or => or.Customer)
+                e.HasOne(or => or.Customer)
                 .WithMany(d => d.Orders)
                 .HasForeignKey(or => or.CustomerID)
+                .HasConstraintName("Customer_Id")
                 .OnDelete(DeleteBehavior.Cascade);
 
-                b.HasOne(or => or.Store)
+                e.HasOne(or => or.Store)
                .WithMany(d => d.Orders)
                .HasForeignKey(or => or.StoreID)
+                .HasConstraintName("Store_Id")
                .OnDelete(DeleteBehavior.Cascade);
 
-                b.HasOne(or => or.Staff)
+                e.HasOne(or => or.Staff)
                .WithMany(d => d.Orders)
                .HasForeignKey(or => or.StaffID)
+               .HasConstraintName("Staff_Id")
                .OnDelete(DeleteBehavior.Cascade);
 
 
 
             });
 
-            modelBuilder.Entity<Stock>(b =>
+            modelBuilder.Entity<Stock>(e =>
             {
-                b.HasKey("ProductID");
+                e.Property(e => e.StoreID)
+                .HasColumnName("Store_Id")
+                .HasColumnType("INT");
 
-                //b.Property<int>("StoreID")
-                //.HasColumnType("int");
-                //b.Property<int>("ProductID")
-                //    .HasColumnType("int");
+                e.Property(e => e.ProductID)
+                .HasColumnName("Product_Id")
+                .HasColumnType("INT");
 
-                //b.HasOne(sto => sto.Product)
-                //.WithOne(d => d.Stocks)
-                //.HasForeignKey(sto => sto.ProductID)
-                //.OnDelete(DeleteBehavior.Cascade);
+                e.ToTable("Stock", "Production");
+
+                e.Property(e => e.Quantity)
+                .HasColumnName("Stock_Quantity")
+                .HasColumnType("INT");
+
+
+                e.HasOne(sto => sto.Product)
+                .WithOne(d => d.Stocks)
+                .HasForeignKey("FK__Stock__Product_I__3A4CA8FD")
+                .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasOne(sto => sto.Store)
+                .WithOne(d => d.Stocks)
+                .HasForeignKey("FK__Stock__Store_Id__395884C4")
+                .OnDelete(DeleteBehavior.Cascade);
+
             });
 
             modelBuilder.Entity<OrderItem>(b =>
