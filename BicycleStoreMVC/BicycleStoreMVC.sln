@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31729.503
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleStoreMVC", "BicycleStoreMVC.csproj", "{098F9F61-DC35-4AC0-9DCF-ABBE05486391}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BicycleStore.Database", "..\BicycleStore.Database\BicycleStore.Database.sqlproj", "{658764D8-9970-4176-AE48-7E46C4FFCA32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleStore.Test", "..\BicycleStore.Test\BicycleStore.Test.csproj", "{DF5ECF06-7B6A-401C-A4C2-D9D703EE77A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BicycleStore.Test", "..\BicycleStore.Test\BicycleStore.Test.csproj", "{DF5ECF06-7B6A-401C-A4C2-D9D703EE77A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleStore.Domain", "..\BicycleStore.Domain\BicycleStore.Domain.csproj", "{D13F1FC1-827B-462E-BCB3-8E31E8C4EEFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{DF5ECF06-7B6A-401C-A4C2-D9D703EE77A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF5ECF06-7B6A-401C-A4C2-D9D703EE77A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF5ECF06-7B6A-401C-A4C2-D9D703EE77A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D13F1FC1-827B-462E-BCB3-8E31E8C4EEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13F1FC1-827B-462E-BCB3-8E31E8C4EEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13F1FC1-827B-462E-BCB3-8E31E8C4EEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13F1FC1-827B-462E-BCB3-8E31E8C4EEFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

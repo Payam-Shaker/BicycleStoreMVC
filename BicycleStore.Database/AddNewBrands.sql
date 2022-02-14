@@ -7,7 +7,8 @@ USING (VALUES
 (@Brd_Id ,'Nishiki'),
 (@Brd_Id+1, 'Trek'),
 (@Brd_Id+2 ,'Monark'),
-(@Brd_Id+3 ,'Bianchi')
+(@Brd_Id+3 ,'Bianchi'),
+(@Brd_Id+4 ,'Moderna')
 )As source ([BrandID], [BrandName])
 On target.[BrandID] = source.[BrandID]
 

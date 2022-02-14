@@ -56,9 +56,23 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Schemas" />
+    <Folder Include="Schemas\Production" />
+    <Folder Include="Schemas\Sales" />
+    <Folder Include="Schemas\Production\Tables" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AddNewCategories.sql" />
     <None Include="AddNewBrands.sql" />
+    <None Include="Schemas\Production\Tables\Brand.sql" />
+    <None Include="Schemas\FK_finder.sql" />
+    <None Include="Schemas\Production\Tables\Category.sql" />
+    <None Include="Schemas\Production\Tables\Product.sql" />
+    <None Include="Schemas\Production\Tables\Stock.sql" />
+    <None Include="Schemas\Sales\Store.sql" />
+    <None Include="Schemas\Sales\Staff.sql" />
+    <None Include="Schemas\Sales\Customer.sql" />
+    <None Include="Schemas\Sales\Order.sql" />
+    <None Include="Schemas\Sales\Order_Item.sql" />
   </ItemGroup>
 </Project>
