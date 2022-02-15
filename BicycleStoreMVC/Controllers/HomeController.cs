@@ -29,6 +29,7 @@ namespace BicycleStoreMVC.Controllers
         {
             //IEnumerable<Brand> result = new List<Brand>();
             var result = _context.Brands.Select(b => b).ToList();
+            //var result = _homeRepository.AppropraiteMethod();
             return View(result);
         }
 
