@@ -1,4 +1,5 @@
-﻿using BicycleStoreMVC.Data;
+﻿using BicycleStore.Domain.Models;
+using BicycleStoreMVC.Data;
 using BicycleStoreMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,8 @@ namespace BicycleStoreMVC.Controllers
         
         public IActionResult Index()
         {
-            var result = _context.Brands.ToList();
+            //IEnumerable<Brand> result = new List<Brand>();
+            var result = _context.Brands.Select(b => b).ToList();
             return View(result);
         }
 

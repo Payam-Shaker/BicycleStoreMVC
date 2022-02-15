@@ -19,11 +19,11 @@ namespace BicycleStore.Domain.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public Store Store { get; set; }
-        //[ForeignKey("Store")]
+        [ForeignKey("Store_Id")]
+        public virtual Store Store { get; set; }
+        [ForeignKey("Store")]
         public int StoreID { get; set; }
-        public ICollection<Staff> Staffs { get; set; }
-        public int? ManagerID { get; set; }
+        //public int? ManagerID { get; set; }
         public ICollection<Order> Orders { get; set; }
 
     }

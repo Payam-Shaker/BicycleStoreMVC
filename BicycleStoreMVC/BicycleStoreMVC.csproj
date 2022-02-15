@@ -20,6 +20,22 @@
 
   <ItemGroup>
     <Compile Remove="BicycleStoreDbContext.cs" />
+    <Compile Remove="Migrations\20220215200723_MyFirstMigration.cs" />
+    <Compile Remove="Migrations\20220215200723_MyFirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220215201036_MyFirstMigration.cs" />
+    <Compile Remove="Migrations\20220215201036_MyFirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220215201719_MyFirstMigration.cs" />
+    <Compile Remove="Migrations\20220215201719_MyFirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220215212710_MyFirstMigration.cs" />
+    <Compile Remove="Migrations\20220215212710_MyFirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220215213607_MyFirstMigration.cs" />
+    <Compile Remove="Migrations\20220215213607_MyFirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20220215214715_Initial.cs" />
+    <Compile Remove="Migrations\20220215214715_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20220215215141_Initial.cs" />
+    <Compile Remove="Migrations\20220215215141_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20220215215349_Initial.cs" />
+    <Compile Remove="Migrations\20220215215349_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +55,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BicycleStore.Domain\BicycleStore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

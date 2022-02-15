@@ -10,7 +10,10 @@ namespace BicycleStore.Domain.Models
     {
         public Store()
         {
-                
+            Orders = new HashSet<Order>();
+            Staffs = new HashSet<Staff>();
+
+
         }
         [Key]
         public int StoreID { get; set; }
@@ -20,7 +23,9 @@ namespace BicycleStore.Domain.Models
         public string Street { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
+
         public Stock Stocks { get; set; }
 
 

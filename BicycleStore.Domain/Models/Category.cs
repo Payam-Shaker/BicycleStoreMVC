@@ -8,10 +8,11 @@ namespace BicycleStore.Domain.Models
 {
     public class Category
     {
-        //public Category()
-        //{
+        public Category()
+        {
+            Products = new HashSet<Product>();
 
-        //}
+        }
         [Key]
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }

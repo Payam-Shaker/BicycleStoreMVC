@@ -23,6 +23,6 @@ namespace BicycleStore.Domain.Models
         public int Quantity { get; set; }
         public decimal ListPrice { get; set; }
         public decimal Discount { get; set; }
-
+        public Order Order { get; set; }
     }
 }
