@@ -36,17 +36,18 @@ namespace BicycleStoreMVC.Controllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            var product = _proRepo.GetById(id);
+            //var product =  _context.Products
+            //    .Include(p => p.Brand)
+            //    .Include(p => p.Category)
+            //    .FirstOrDefaultAsync(m => m.ProductID == id);
 
-            var product = await _context.Products
-                .Include(p => p.Brand)
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.ProductID == id);
             if (product == null)
             {
                 return NotFound();
