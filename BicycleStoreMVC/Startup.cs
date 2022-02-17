@@ -1,4 +1,5 @@
 using BicycleStoreMVC.Data;
+using BicycleStoreMVC.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace BicycleStoreMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped(typeof(ICrud<>), typeof(Crud<>));
 
             //Authentication Middleware Services with the AddAuthentication and AddCookie method.
             // Authentication scheme passed to AddAuthentication sets to the default authentication scheme for the app.

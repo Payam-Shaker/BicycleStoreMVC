@@ -1,6 +1,7 @@
 ﻿using BicycleStore.Domain.Models;
 using BicycleStoreMVC.Data;
 using BicycleStoreMVC.Models;
+using BicycleStoreMVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,20 +16,23 @@ namespace BicycleStoreMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICrud<Brand> _crud;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, ICrud<Brand> crud)
         {
             _logger = logger;
             _context = context;
+            _crud = crud;
+
         }
 
-        
+
         public IActionResult Index()
         {
             //IEnumerable<Brand> result = new List<Brand>();
-            var result = _context.Brands.Select(b => b).ToList();
+            var result = _crud.GetAll();
             //var result = _homeRepository.AppropraiteMethod();
             return View(result);
         }

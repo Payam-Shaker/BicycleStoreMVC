@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BicycleStoreMVC.Data;
 using BicycleStore.Domain.Models;
+using BicycleStoreMVC.Repositories;
 
 namespace BicycleStoreMVC.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         public ProductsController(ApplicationDbContext context)
         {
             _context = context;
         }
+
 
         // GET: Products
         public async Task<IActionResult> Index()

@@ -48,10 +48,5 @@ namespace BicycleStoreMVC.Repositories
         {
             _context.SaveChanges();
         }
-
-        IEnumerable<T> ICrud<T>.GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
