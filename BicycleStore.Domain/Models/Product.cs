@@ -11,7 +11,7 @@ namespace BicycleStore.Domain.Models
     {
         public Product()
         {
-
+            //Brand = new Brand();
         }
         //[Key]
         public int ProductID { get; set; }
@@ -22,7 +22,7 @@ namespace BicycleStore.Domain.Models
         public Category Category { get; set; }
         //[ForeignKey ("Category")]
         public int CategoryID { get; set; }
-        //[ForeignKey("Brand_Id")]
+        [ForeignKey("Brand_Id")]
         public virtual Brand Brand { get; set; }
         public int BrandID { get; set; }
         public Stock Stocks { get; set; }

@@ -15,9 +15,10 @@ namespace BicycleStoreMVC.Repositories
             _context = context;
             table = _context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        //Changed IENumerable -- ToList() to IQueryable -- AsQueryable()
+        public IQueryable<T> GetAll()
         {
-            return table.ToList();
+            return table.AsQueryable();
         }
         public T GetById(object id)
         {
