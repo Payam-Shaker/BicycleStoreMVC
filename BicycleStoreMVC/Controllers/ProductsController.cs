@@ -14,17 +14,24 @@ namespace BicycleStoreMVC.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public ProductsController(ApplicationDbContext context)
+        private readonly ICrud<Product> _crud;
+
+
+        public ProductsController(ApplicationDbContext context, ICrud<Product> crud)
         {
             _context = context;
+            _crud = crud;
         }
 
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(await applicationDbContext.ToListAsync());
+            var result = _crud.GetAll();
+
+            return View(result);
+            //var applicationDbContext = _context.Products.Include(p => p.Brand).Include(p => p.Category);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Products/Details/5
