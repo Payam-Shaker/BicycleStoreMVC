@@ -3,9 +3,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bicycle Store</h1>
 </div>
 <div>
     @foreach (var b in Model)
@@ -14,5 +14,25 @@
             @b.BrandName
         </p>
     }
+<div class="text-center" style="margin-bottom: 15px;">
+            <p>Do you want to view all of our collection? </p>
+        @Html.ActionLink("All Bicycle List!","Index", "All List");
+        </div>
+        </div>
 
-</div>
+@section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                 var url = "@(Html.Raw(Url.Action("GetAll", "Products")))";
+                    $('#listOfActivities').load(url);
+                    });
+            function loadActivities() {
+                alert("hit the jquery function");
+                event.preventDefault();
+                $.get('@Url.ActionLink("GetAll", "Products")',function(data){
+                    $('#listOfActivities').html(data);
+                })
+                }
+        </script>
+    } 

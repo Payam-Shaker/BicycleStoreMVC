@@ -59,14 +59,12 @@ namespace BicycleStoreMVC.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName");
+            ViewData["BrandName"] = new SelectList(_context.Brands , "BrandID", "BrandName");
             ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName");
             return View();
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductID,ProductName,ModelYear,ListPrice,CategoryID,BrandID")] Product product)
@@ -101,8 +99,6 @@ namespace BicycleStoreMVC.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductID,ProductName,ModelYear,ListPrice,CategoryID,BrandID")] Product product)
