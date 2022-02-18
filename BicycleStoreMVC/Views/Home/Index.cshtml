@@ -3,10 +3,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+    <p>
+    <a asp-action="Index">Brands</a>
+    </p>
 
 <div class="text-center">
     <h1 class="display-4">Bicycle Store</h1>
+
+
 </div>
+
+
 <div>
     @foreach (var b in Model)
     {
@@ -18,6 +25,9 @@
             <p>Do you want to view all of our collection? </p>
         @Html.ActionLink("All Bicycle List!","Index", "All List");
         </div>
+
+          
+
         </div>
 
 @section scripts
