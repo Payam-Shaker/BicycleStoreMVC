@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BicycleStore.Test
 {
+    //TODO: testsearch logic in the main Product page
     [TestClass]
     public class UserTest
     {
