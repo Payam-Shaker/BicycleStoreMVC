@@ -31,20 +31,27 @@ namespace BicycleStoreMVC.Controllers
         }
         public IActionResult AddToCart(int ProductID)
         {
-            var cart = new List<OrderItem>();
+            var order = new List<OrderItem>();
             var product = _proRepo.GetById(ProductID);
             if (product != null)
             {
-                cart.Add(new OrderItem()
+                order.Add(new OrderItem()
                 {
                     Product = product,
                     Quantity = 1
                 });
-                HttpContext.Session.SetObjectAsJson("cart", cart);
+                HttpContext.Session.SetObjectAsJson("order", order);
             }
 
 
             return View();
+        }
+        // GET: Order
+        public IActionResult Index()
+        {
+            orderItem = HttpContext.Session.GetObjectFromJson<List<OrderItem>>("order");
+            Total = orderItem.Sum(i => i.Product.ListPrice * i.Quantity);
+            return View(orderItem);
         }
     }
 }
