@@ -36,6 +36,15 @@ namespace BicycleStoreMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
+
+            services.AddHttpContextAccessor();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            services.AddMvc().AddXmlDataContractSerializerFormatters();
+            services.AddMemoryCache();
+
             services.AddScoped(typeof(ICrud<>), typeof(Crud<>));
 
             //Authentication Middleware Services with the AddAuthentication and AddCookie method.
@@ -48,6 +57,7 @@ namespace BicycleStoreMVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSession();
             app.UseDeveloperExceptionPage();
             app.UseDatabaseErrorPage();
 
