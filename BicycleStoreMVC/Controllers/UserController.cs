@@ -110,7 +110,7 @@ namespace BicycleStoreMVC.Controllers
             }
             //check whether password is correct...
             //if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
-                return null;
+                //return null;
 
             //authentication is successful
             return PartialView("_LoginSuccessfull");
