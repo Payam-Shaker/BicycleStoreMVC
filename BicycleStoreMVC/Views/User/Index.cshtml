@@ -1,4 +1,5 @@
 ﻿@model BicycleStore.Domain.DTOs.CustomerDto
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -35,16 +36,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <input asp-for="Password" class="form-control" id="Password" name="Password" type="password" value="" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
+                <input asp-for="ConfirmPassword" class="form-control" id="ConfirmPassword" name="ConfirmPassword" type="password" value="" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" asp-controller="User" asp-action="Register"/>
+                <input type="submit" value="Create" class="btn btn-primary" asp-controller="User" asp-action="Register" />
             </div>
         </form>
     </div>
