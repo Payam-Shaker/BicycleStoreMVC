@@ -8,7 +8,7 @@ namespace BicycleStore.Domain.DTOs
 {
     public class CustomerDto
     {
-        //public int CustomerID { get; set; }
+        public int CustomerID { get; set; }
         [Required(ErrorMessage ="You cannot leave first name empty!")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "You cannot leave last name empty!")]
