@@ -16,11 +16,11 @@ namespace BicycleStoreMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly ICrud<Brand> _crud;
+        private readonly ICrud<Product> _crud;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, ICrud<Brand> crud)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, ICrud<Product> crud)
         {
             _logger = logger;
             _context = context;
@@ -29,13 +29,44 @@ namespace BicycleStoreMVC.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
             //IEnumerable<Brand> result = new List<Brand>();
-            var result = _crud.GetAll();
-            //var result = _homeRepository.AppropraiteMethod();
-            return View(result);
+            //var products = _crud.GetAll();
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = string.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var products = _crud.GetAll();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.ProductName.Contains(searchString));
+                                       //|| s.FirstMidName.Contains(searchString))                   
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.ProductName);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.ListPrice);
+                    break;
+                //case "Date":
+                //    products = products.OrderBy(s => s.);
+                //    break;
+                //case "date_desc":
+                //    products = products.OrderByDescending(s => s.EnrollmentDate);
+                //    break;
+                default:
+                    products = products.OrderBy(s => s.ProductName);
+                    break;
+            }
+            return View(products);
         }
+        //public PartialViewResult Products()
+        //{
+        //    return PartialView("_searchProducts");
+        //}
 
         [Authorize]
         public IActionResult ConfidentialData()

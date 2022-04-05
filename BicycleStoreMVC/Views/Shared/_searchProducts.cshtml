@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BicycleStore.Domain.Models.Product>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("Product Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModelYear)
+                </th>
+                <th>
+                    @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModelYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ListPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                    </td>
+                    @*            <td>
+                            <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
