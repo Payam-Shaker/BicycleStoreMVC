@@ -7,6 +7,7 @@
     [Customer_Street] VARCHAR(255) NULL,
     [Customer_City] VARCHAR(255) NULL,
     [Customer_ZipCode] VARCHAR(50) NULL,
+    [Role] INT NULL,
 
   CONSTRAINT [PK_Customer] PRIMARY KEY  ([Customer_Id] ASC)
 

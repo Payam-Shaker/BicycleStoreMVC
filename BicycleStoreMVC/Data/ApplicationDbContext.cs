@@ -137,7 +137,9 @@ namespace BicycleStoreMVC.Data
                 .HasColumnName("Customer_ZipCode")
                 .HasColumnType("varchar(50)");
 
-
+                e.Property(e => e.Role)
+                .HasColumnName("Role")
+                .HasColumnType("int");
             });
 
             modelBuilder.Entity<Order>(e =>

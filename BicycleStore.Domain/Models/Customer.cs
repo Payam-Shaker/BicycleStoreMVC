@@ -24,6 +24,6 @@ namespace BicycleStore.Domain.Models
         public string? City { get; set; }
         public string? ZipCode { get; set; }
         public ICollection<Order> Orders { get; set; }
-
+        public int Role { get; set; }
     }
 }
