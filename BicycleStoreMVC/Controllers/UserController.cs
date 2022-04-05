@@ -50,7 +50,8 @@ namespace BicycleStoreMVC.Controllers
                         Email = customerDto.Email,
                         Street = customerDto.Street,
                         City = customerDto.City,
-                        ZipCode = customerDto.ZipCode
+                        ZipCode = customerDto.ZipCode,
+                        Role = 2
                     };
 
 
@@ -106,17 +107,31 @@ namespace BicycleStoreMVC.Controllers
 
             if (user == null)
             {
+                //TODO: Show error on login form!
                 return null;
+            }
+            else
+            {
+                TempData["currentUser"] = user.FirstName;
             }
             //check whether password is correct...
             //if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
-                //return null;
+            //return null;
 
             //authentication is successful
-            return PartialView("_LoginSuccessfull");
+            //return PartialView("_LoginSuccessfull");
+            if (user.Role == 1)
+            {
+                return RedirectToAction("Index", "Products");
+            }
+            return RedirectToAction("Index", "Home");
         }
-
-       // [HttpPost]
+        public IActionResult Logout()
+        {
+            TempData["currentUser"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+        // [HttpPost]
         //public IActionResult Authenticate(CustomerLoginDto customerLoginDto)
         //{
         //    if (!ModelState.IsValid)
@@ -146,7 +161,7 @@ namespace BicycleStoreMVC.Controllers
         //            throw new Exception($"Login failed!", ex);
         //        }
         //    }
-           
+
         //}
 
         public Customer FindByEmail(string userName)
