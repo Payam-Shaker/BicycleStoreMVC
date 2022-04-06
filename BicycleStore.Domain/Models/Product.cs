@@ -27,6 +27,7 @@ namespace BicycleStore.Domain.Models
         public int BrandID { get; set; }
         public Stock Stocks { get; set; }
         public OrderItem OrderItems { get; set; }
+        public string Image { get; set; }
 
     }
 }

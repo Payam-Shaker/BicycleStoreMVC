@@ -48,6 +48,10 @@ namespace BicycleStoreMVC.Data
                 .HasColumnName("Product_Price")
                 .HasColumnType("DECIMAL(10,2)");
 
+                e.Property(e => e.Image)
+                .HasColumnName("Image")
+                .HasColumnType("varchar(500)");
+
                 e.Property(e => e.CategoryID)
                 .IsRequired(true)
                 .HasColumnName("Category_Id")
@@ -57,8 +61,7 @@ namespace BicycleStoreMVC.Data
                 .IsRequired(true)
                 .HasColumnName("Brand_Id")
                 .HasColumnType("INT");
-
-
+                
                 e.HasOne(prod => prod.Category)
                 .WithMany(d => d.Products)
                 .HasForeignKey(prod => prod.CategoryID)

@@ -31,27 +31,41 @@
         </div>
         <div>
             <h1 class="display-4">Our newest products...</h1>
-            @foreach (var p in Model.Take(3))
-            {
-                <div class="row row-cols-3 row-cols-md-2">
-                    <div class="col mb-4">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">@p.ProductName</h4>
-                                <p class="card-text">@p.ModelYear ; @p.Brand ; @p.ListPrice</p>
-                                <a href="http://publicdomainarchive.com/free-stock-photos-chicago-
+
+            <div class="container">
+                <div class="position-relative row ">
+                    @foreach (var p in Model.Take(3))
+                    {
+                        <div class="card-group position-relative">
+
+                            <div class="row-cols-3 row-cols-md-2">
+                                <div class="col mb-4">
+
+                                    <div class="card position-relative">
+                                        <div class=" card-block ">
+                                            <h4 class="card-title">@p.ProductName</h4>
+                                            <p class="card-text">@p.ModelYear ; @p.Brand.BrandName ; @p.ListPrice </p>
+                                            <a class="card-img">  <img src="@Html.DisplayFor(modelItem => p.Image)" /></a>
+                                            <a href="http://publicdomainarchive.com/free-stock-photos-chicago-
                          skyline-night-hotel-71-wacker-drive/"
-                                   class="btn btn-primary">Visit Source</a>
+                                               class="btn btn-primary">Visit Source</a>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                    }
                 </div>
-             }
-         </div>
-        <div>
-            @Html.Partial("_searchProducts")
-        </div>
-        </div>
+            </div>
+
+
+                </div>
+                <div>
+                    @Html.Partial("_searchProducts")
+                </div>
+            </div>
 </body>
 @*<div>
     @foreach (var b in Model)

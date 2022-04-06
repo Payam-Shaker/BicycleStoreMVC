@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light  border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BicycleStoreMVC</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -23,25 +23,34 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Join us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Contact us</a>
                         </li>
                         <!--if user is authenticated....-->
                         @if (TempData["currentUser"] != null)
                         {
-                            <li class="nav-item">
+                            <li class="nav-item  ml-auto">
                                 <p>Hello @TempData["currentUser"].ToString()</p>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark float-right" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                            <li class="nav-item ml-auto">
+                                <a class="nav-link text-dark ml-auto" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
                             </li>
 
 
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark float-right" asp-area="" asp-controller="User" asp-action="Index">Register</a>
+                            <li class="nav-item ml-auto">
+                                <a class="nav-link text-dark ml-auto" asp-area="" asp-controller="User" asp-action="Index">Register</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark float-right" asp-area="" asp-controller="User" asp-action="LoginView">Login</a>
@@ -59,11 +68,36 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-           &copy; 2021 - BicycleStoreMVC - <a asp-area="" asp-controller="Products" asp-action="Index">Productions</a>
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+               &copy; 2021 - BicycleStoreMVC - <a asp-area="" asp-controller="Products" asp-action="Index">Productions</a>
+            </div>
+        </footer>*@
+    <style>
+        .footer {
+            display: flex;
+            justify-content: center;
+        }
+        .icons-margin {
+            margin-right: 20px;
+        }
+    </style>
+    <footer>
+        <div class="footer navbar-light bg-light border-bottom box-shadow mb-3 ">
+            <a class=" icons-margin "> &copy; 2021 - BicycleStoreMVC  </a>
+            <a href="mailto:payam.shaker@hotmail.com">
+                <img class="img-responsive icons-margin" src="~/Images/envelope-fill.svg" alt="Email" width="32" height="32" />
+            </a>
+            <a href="tel:+46700302496">
+                <img class="img-responsive icons-margin" src="~/Images/telephone-fill.svg" alt="Telephone" width="32" height="32" />
+                +46700302496
+            </a>
+
         </div>
+
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
