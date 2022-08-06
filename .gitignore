@@ -362,3 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Instructions.txt
+/BicycleStore.Data/Migrations/BicycleStoreDbContextModelSnapshot.cs
+/BicycleStore.Data/Migrations/20220806192654_SeedData.Designer.cs
+/BicycleStore.Data/Migrations/20220806192654_SeedData.cs
+/BicycleStore.Data/Migrations

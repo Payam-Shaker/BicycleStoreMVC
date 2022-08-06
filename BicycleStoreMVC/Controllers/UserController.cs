@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Security.Claims;
 using BicycleStore.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BicycleStoreMVC.Controllers
 {
@@ -18,13 +19,11 @@ namespace BicycleStoreMVC.Controllers
     /// </summary>
     public class UserController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public UserController(ApplicationDbContext context)
+        private readonly BicycleStoreDbContext _context;
+        public UserController(BicycleStoreDbContext context)
         {
             _context = context;
         }
-
-
         public IActionResult Index()
         {
             return View();
@@ -36,6 +35,8 @@ namespace BicycleStoreMVC.Controllers
             {
                 try
                 {
+                    //TODO: FIx UserAlreadyExists()
+
                     //create password salt passwordhash
                     byte[] passwordHash, passwordSalt;
                     CreatePasswordHash(customerDto.Password, out passwordHash, out passwordSalt);
@@ -44,42 +45,42 @@ namespace BicycleStoreMVC.Controllers
                     {
                         FirstName = customerDto.FirstName,
                         LastName = customerDto.LastName,
-                        //PasswordHash = passwordHash,
-                        //PasswordSalt = passwordSalt,
-                        //CreatedDate = DateTime.Now,
+                        PasswordHash = passwordHash,
+                        PasswordSalt = passwordSalt,
+                        Created = DateTime.Now,
                         Email = customerDto.Email,
                         Street = customerDto.Street,
                         City = customerDto.City,
                         ZipCode = customerDto.ZipCode,
-                        Role = 2
+                        Role = 2 //1 is reserved for admin role which can be modfied manually. All new users are non-admins then.
                     };
-
-
                     //save to database
                     _context.Add(obj);
                     _context.SaveChanges();
-
                     //to clear the form
                     ModelState.Clear();
                     //success msg
                     return PartialView("_RegisterSuccessful");
-
                 }
                 catch (Exception ex)
                 {
-
+                    //TODO> fix the reg. form view to show pop-up error message
                     throw new Exception(ex.Message);
                 }
-
-
-
             }
             else
             {
                 return View("Index");
-
             }
         }
+        //public async Task<bool> UserExists(string username)
+        //{
+        //    if (await _context.Customers.AnyAsync(x => x.FirstName.ToLower() == username.ToLower()))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -102,28 +103,19 @@ namespace BicycleStoreMVC.Controllers
         {
             if (string.IsNullOrEmpty(customerLoginDto.UserName) || string.IsNullOrEmpty(customerLoginDto.Password))
                 return null;
-            //check for username 
-            var user = FindByEmail(customerLoginDto.UserName);
-
-            if (user == null)
-            {
-                //TODO: Show error on login form!
-                return null;
-            }
-            else
-            {
-                TempData["currentUser"] = user.FirstName;
-            }
+            //TODO: Find user by email first
             //check whether password is correct...
-            //if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
-            //return null;
+            var user = _context.Customers.Where(c => c.Email.ToLower() == customerLoginDto.UserName.ToLower()).FirstOrDefault();
+            if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+                return null;
+            TempData["currentUser"] = user.FirstName;
 
-            //authentication is successful
-            //return PartialView("_LoginSuccessfull");
             if (user.Role == 1)
             {
                 return RedirectToAction("Index", "Products");
             }
+
+            //authentication is successful - return to home page with user name displayed on the navbar
             return RedirectToAction("Index", "Home");
         }
         public IActionResult Logout()
@@ -131,38 +123,6 @@ namespace BicycleStoreMVC.Controllers
             TempData["currentUser"] = null;
             return RedirectToAction("Index", "Home");
         }
-        // [HttpPost]
-        //public IActionResult Authenticate(CustomerLoginDto customerLoginDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View("Index");
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            var user = Login(customerLoginDto.UserName);
-
-        //            if (user == null)
-        //            {
-        //                ModelState.AddModelError(" ", "Username or Password is wrong!");
-        //                return View("Login");
-        //            }
-        //            var claims = new List<Claim>()
-        //            {
-        //                new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.UserName)),
-        //                new Claim(ClaimTypes.Name, user.)
-        //            };
-        //        }
-        //        catch (Exception ex)
-        //        {
-
-        //            throw new Exception($"Login failed!", ex);
-        //        }
-        //    }
-
-        //}
 
         public Customer FindByEmail(string userName)
         {

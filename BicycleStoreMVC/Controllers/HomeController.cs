@@ -16,13 +16,13 @@ namespace BicycleStoreMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BicycleStoreDbContext _context;
         private readonly ICrud<Product> _proRepo;
         private readonly ICrud<Brand> _brandRepo;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, ICrud<Product> proRepo, ICrud<Brand> brandRepo)
+        public HomeController(ILogger<HomeController> logger, BicycleStoreDbContext context, ICrud<Product> proRepo, ICrud<Brand> brandRepo)
         {
             _logger = logger;
             _context = context;

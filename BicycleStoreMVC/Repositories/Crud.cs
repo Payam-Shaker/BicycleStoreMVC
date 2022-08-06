@@ -7,10 +7,10 @@ namespace BicycleStoreMVC.Repositories
 {
     public class Crud<T> : ICrud<T> where T : class
     {
-        private ApplicationDbContext _context;
+        private BicycleStoreDbContext _context;
         private DbSet<T> table;      
 
-        public Crud(ApplicationDbContext context)
+        public Crud(BicycleStoreDbContext context)
         {
             _context = context;
             table = _context.Set<T>();

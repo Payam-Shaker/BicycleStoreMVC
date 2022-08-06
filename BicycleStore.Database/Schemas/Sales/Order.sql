@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Sales].[Order]  (
+﻿  CREATE TABLE [Sales].[Order]  (
     [Order_Id] INT IDENTITY(1,1) NOT NULL,
 	/* [Order_Status]: 1 = Pending; 2 = Processing; 
 	3 = Rejected; 4 = Completed */

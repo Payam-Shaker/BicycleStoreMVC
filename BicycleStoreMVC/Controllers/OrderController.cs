@@ -15,7 +15,7 @@ namespace BicycleStoreMVC.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BicycleStoreDbContext _context;
         private readonly ICrud<Order> _orderRepo;
         private readonly ICrud<Product> _proRepo;
 
@@ -23,7 +23,7 @@ namespace BicycleStoreMVC.Controllers
         public decimal? Total { get; set; }
 
 
-        public OrderController(ApplicationDbContext context, ICrud<Order> orderRepo, ICrud<Product> proRepo)
+        public OrderController(BicycleStoreDbContext context, ICrud<Order> orderRepo, ICrud<Product> proRepo)
         {
             _context = context;
             _orderRepo = orderRepo;

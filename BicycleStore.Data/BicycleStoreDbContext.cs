@@ -1,16 +1,15 @@
 ﻿using BicycleStoreMVC.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using BicycleStore.Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BicycleStoreMVC.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class BicycleStoreDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BicycleStoreDbContext(DbContextOptions<BicycleStoreDbContext> options)
             : base(options)
         {
         }
@@ -28,8 +27,7 @@ namespace BicycleStoreMVC.Data
         {
             modelBuilder.Entity<Product>(e =>
             {
-                e.HasKey(e => e.ProductID)
-                .HasName ("Product_Id");
+                e.HasKey(e => e.ProductID);
 
                 e.ToTable("Product", "Production");
 
@@ -77,8 +75,7 @@ namespace BicycleStoreMVC.Data
             {
                 e.ToTable("Brand", "Production");
 
-                e.HasKey(e => e.BrandID)
-                .HasName("Brand_Id");
+                e.HasKey(e => e.BrandID);
 
 
                 e.Property(e => e.BrandName)
@@ -89,8 +86,7 @@ namespace BicycleStoreMVC.Data
 
             modelBuilder.Entity<Category>(e =>
             {
-                e.HasKey(e => e.CategoryID)
-                .HasName("Category_Id");
+                e.HasKey(e => e.CategoryID);
 
                 e.ToTable("Category", "Production");
 
@@ -103,8 +99,7 @@ namespace BicycleStoreMVC.Data
 
             modelBuilder.Entity<Customer>(e =>
             {
-                e.HasKey(e => e.CustomerID)
-                .HasName("Customer_Id");
+                e.HasKey(e => e.CustomerID);
 
                 e.ToTable("Customer", "Sales");
 
@@ -147,8 +142,7 @@ namespace BicycleStoreMVC.Data
 
             modelBuilder.Entity<Order>(e =>
             {
-                e.HasKey(e => e.OrderID)
-                .HasName("Order_Id");
+                e.HasKey(e => e.OrderID);
 
                 e.ToTable("Order", "Sales");
 
@@ -282,8 +276,7 @@ namespace BicycleStoreMVC.Data
             });
             modelBuilder.Entity<Store>(e =>
             {
-                e.HasKey(e => e.StoreID)
-                .HasName("Store_Id");
+                e.HasKey(e => e.StoreID);
 
                 e.ToTable("Store", "Sales");
 
@@ -316,8 +309,7 @@ namespace BicycleStoreMVC.Data
 
             modelBuilder.Entity<Staff>(e =>
             {
-                e.HasKey(e => e.StaffID)
-                .HasName("Staff_Id");
+                e.HasKey(e => e.StaffID);
 
                 e.ToTable("Staff", "Sales");
 

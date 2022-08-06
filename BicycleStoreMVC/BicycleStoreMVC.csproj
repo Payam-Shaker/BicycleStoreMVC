@@ -9,33 +9,22 @@
 
   <ItemGroup>
     <Compile Remove="DTOs\**" />
+    <Compile Remove="Migrations\**" />
     <Compile Remove="Models\**" />
     <Content Remove="DTOs\**" />
+    <Content Remove="Migrations\**" />
     <Content Remove="Models\**" />
     <EmbeddedResource Remove="DTOs\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Models\**" />
     <None Remove="DTOs\**" />
+    <None Remove="Migrations\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="BicycleStoreDbContext.cs" />
-    <Compile Remove="Migrations\20220215200723_MyFirstMigration.cs" />
-    <Compile Remove="Migrations\20220215200723_MyFirstMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220215201036_MyFirstMigration.cs" />
-    <Compile Remove="Migrations\20220215201036_MyFirstMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220215201719_MyFirstMigration.cs" />
-    <Compile Remove="Migrations\20220215201719_MyFirstMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220215212710_MyFirstMigration.cs" />
-    <Compile Remove="Migrations\20220215212710_MyFirstMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220215213607_MyFirstMigration.cs" />
-    <Compile Remove="Migrations\20220215213607_MyFirstMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220215214715_Initial.cs" />
-    <Compile Remove="Migrations\20220215214715_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20220215215141_Initial.cs" />
-    <Compile Remove="Migrations\20220215215141_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20220215215349_Initial.cs" />
-    <Compile Remove="Migrations\20220215215349_Initial.Designer.cs" />
+    <Compile Remove="Data\ApplicationDbContext.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,11 +43,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BicycleStore.Data\BicycleStore.Data.csproj" />
     <ProjectReference Include="..\BicycleStore.Domain\BicycleStore.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\Photo1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

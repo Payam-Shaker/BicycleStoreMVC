@@ -11,31 +11,29 @@ using BicycleStoreMVC.Repositories;
 
 namespace BicycleStoreMVC.Controllers
 {
+    /// <summary>
+    /// This controller manages view and CRUD actions on products
+    /// </summary>
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BicycleStoreDbContext _context;
         private readonly ICrud<Product> _proRepo;
         private readonly ICrud<Brand> _brandRepo;
-
-
-
-        public ProductsController(ApplicationDbContext context, ICrud<Product> proRepo, ICrud<Brand> brandRepo)
+        public ProductsController(BicycleStoreDbContext context, ICrud<Product> proRepo, ICrud<Brand> brandRepo)
         {
             _context = context;
             _proRepo = proRepo;
             _brandRepo = brandRepo;
         }
 
-
         // GET: Products
         public IActionResult Index()
         {
-
             var products = _proRepo.GetAll().Include(p => p.Brand).Include(p => p.Category);
             return View(products);
         }
 
-        // GET: Products/Details/5
+        // GET: Products/Details/{id}
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -43,11 +41,6 @@ namespace BicycleStoreMVC.Controllers
                 return NotFound();
             }
             var product = _proRepo.GetById(id);
-            //var product =  _context.Products
-            //    .Include(p => p.Brand)
-            //    .Include(p => p.Category)
-            //    .FirstOrDefaultAsync(m => m.ProductID == id);
-
             if (product == null)
             {
                 return NotFound();
@@ -75,12 +68,10 @@ namespace BicycleStoreMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["BrandName"] = new SelectList(_context.Brands, "BrandID", "BrandName", product.BrandID);
-            //ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
-        // GET: Products/Edit/5
+        // GET: Products/Edit/{id}
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,7 +89,7 @@ namespace BicycleStoreMVC.Controllers
             return View(product);
         }
 
-        // POST: Products/Edit/5
+        // POST: Products/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductID,ProductName,ModelYear,ListPrice,CategoryID,BrandID")] Product product)
@@ -133,7 +124,7 @@ namespace BicycleStoreMVC.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
+        // GET: Products/Delete/{id}
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,7 +144,7 @@ namespace BicycleStoreMVC.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
+        // POST: Products/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
