@@ -3,17 +3,12 @@ using BicycleStoreMVC.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BicycleStoreMVC.Services;
+using BicycleStoreMVC.Services.User;
 
 namespace BicycleStoreMVC
 {
@@ -47,6 +42,8 @@ namespace BicycleStoreMVC
             services.AddMemoryCache();
 
             services.AddScoped(typeof(ICrud<>), typeof(Crud<>));
+            services.AddScoped<IUserService, UserService>();
+
 
             //Authentication Middleware Services with the AddAuthentication and AddCookie method.
             // Authentication scheme passed to AddAuthentication sets to the default authentication scheme for the app.

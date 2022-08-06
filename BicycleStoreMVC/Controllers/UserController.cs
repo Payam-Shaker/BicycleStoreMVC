@@ -11,6 +11,7 @@ using System.Data;
 using System.Security.Claims;
 using BicycleStore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using BicycleStoreMVC.Services;
 
 namespace BicycleStoreMVC.Controllers
 {
@@ -20,9 +21,11 @@ namespace BicycleStoreMVC.Controllers
     public class UserController : Controller
     {
         private readonly BicycleStoreDbContext _context;
-        public UserController(BicycleStoreDbContext context)
+        private readonly IUserService _userService;
+        public UserController(BicycleStoreDbContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
         public IActionResult Index()
         {
@@ -36,10 +39,13 @@ namespace BicycleStoreMVC.Controllers
                 try
                 {
                     //TODO: FIx UserAlreadyExists()
-
+                    if (UserExists(customerDto.Email))
+                    {
+                        throw new Exception();
+                    }
                     //create password salt passwordhash
                     byte[] passwordHash, passwordSalt;
-                    CreatePasswordHash(customerDto.Password, out passwordHash, out passwordSalt);
+                    _userService.CreatePasswordHash(customerDto.Password, out passwordHash, out passwordSalt);
                     //convert customerDto to customer 
                     var obj = new Customer
                     {
@@ -73,25 +79,13 @@ namespace BicycleStoreMVC.Controllers
                 return View("Index");
             }
         }
-        //public async Task<bool> UserExists(string username)
-        //{
-        //    if (await _context.Customers.AnyAsync(x => x.FirstName.ToLower() == username.ToLower()))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public bool UserExists(string username)
         {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            if (_context.Customers.Any(x => x.Email.ToLower() == username.ToLower()))
             {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return true;
             }
+            return false;
         }
 
         public IActionResult LoginView()
@@ -106,7 +100,7 @@ namespace BicycleStoreMVC.Controllers
             //TODO: Find user by email first
             //check whether password is correct...
             var user = _context.Customers.Where(c => c.Email.ToLower() == customerLoginDto.UserName.ToLower()).FirstOrDefault();
-            if (!VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+            if (!_userService.VerifyPasswordHash(customerLoginDto.Password, user.PasswordHash, user.PasswordSalt))
                 return null;
             TempData["currentUser"] = user.FirstName;
 
@@ -135,24 +129,6 @@ namespace BicycleStoreMVC.Controllers
             {
                 throw new Exception($"User not found!");
             }
-        }
-        public bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
-        {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-            if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
-            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
-
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != storedHash[i]) return false;
-                }
-            }
-
-            return true;
         }
     }
 }
