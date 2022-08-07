@@ -17,8 +17,15 @@ a web project where views, controlled and database context is defined and a data
 where table scripts and future stored procedures are stored. The database is currently divided to two
 different schemas, namely Production and Sales. 
 
+## Setup
+To run this project locally, a new database can be created by SSMS whose connection string can be pasted into appsettings.json of BicycleStoreMVC project. 
+This solution comes with a class library, BicycleStore.Data, where tabel relations are defined in a DbContext. After passing in the new connection string 
+entity framework commands, Add-migration and then Update-Database, can be run via PMC, while the default project is set on BicycleStore.Data. Alternatively, one can 
+create and populate tables with scripts that are available in BicycleStore.Database catalogue. 
+By running the application on IIS Express the created tables will be populated with some test data that are available, and can be modified, in SeedData.cs in BicycleStore.Data.
+
 Registration and login system in BicycleStore application is
-managed using some simple methods which goes through methods in UserController.cs. The user data is saved to 
+managed using some simple methods from a UserService which has been injected into the UserController.cs. The user data is saved to 
 [Sales].[Customer] table by generating password hash and password salt for the password
 they type into the registration form.
 
@@ -47,6 +54,7 @@ passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 }
 
 ```
+
 ### Installing
 
 This project can be cloned from this link:
